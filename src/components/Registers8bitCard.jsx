@@ -39,6 +39,10 @@ const dec2bin8 = (dec) => {
     binaryStr = "0" + binaryStr;
   }
 
+  if(binaryStr.length >= 8){
+    binaryStr = binaryStr.slice(binaryStr.length-8, binaryStr.length)
+  }
+
   return binaryStr;
 };
 
@@ -49,7 +53,12 @@ const dec2hex = (dec) => {
 
 //convert binary to decimal
 const bin2dec = (bin) => {
-  return parseInt(bin, 2);
+  //return parseInt(bin, 2);
+  let value = parseInt(bin, 2);
+  if (value > 127) {
+    value = value - 256;
+  }
+  return value;
 };
 
 const Registers8bitCard = React.memo(({ registers }) => {
@@ -57,7 +66,7 @@ const Registers8bitCard = React.memo(({ registers }) => {
 
   React.useEffect(() => {
     if (registers.length === 0) {
-      setRegs8bit([...reg8BitArr]);
+      setRegs8bit(JSON.parse(JSON.stringify(reg8BitArr)));
     } else {
       let registersCopy = JSON.parse(JSON.stringify(registers));
       registersCopy = registersCopy.slice(0, 4);
