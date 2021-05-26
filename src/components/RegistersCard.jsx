@@ -66,7 +66,6 @@ const RegistersCard = React.memo(({ registers }) => {
         <div className="row mt-2 " style={{ borderBottom: "1px solid white" }}>
           <div className="col text-center">Name</div>
           <div className="col text-center">Value</div>
-          {/*<div className="col text-center">Binary</div>*/}
         </div>
         {regs.map((reg, index) => (
           <div
