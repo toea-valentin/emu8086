@@ -2,7 +2,7 @@
 
 ![alt text](ss2.png "Main")
 
-## Demo :  http://emu8086.pythonanywhere.com/
+### Demo :  http://emu8086.pythonanywhere.com/
 
 An 8086 Emulator that runs in the browser. It has a highlighted code editor, 3 cards - one displaying the flags, another displaying the 64 bits registers and the last displaying the half 8 bits registers of every A, B, C, D register. It can compile code and display the final result or step through each instruction while seeing the values change in real time.
 
