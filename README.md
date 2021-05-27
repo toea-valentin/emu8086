@@ -40,7 +40,7 @@ The frontend also can display the values under 3 formats: decimal, binary and he
 # Implementation
 \* Problem solved: Had to switch to a python backend due to the fact that the Unicorn library for Javascript got discontinued and was not fully developed.
 
-The python script named server.py runs a Flask server with 3 routes\
+The python script named server.py runs a Flask server with 3 routes
 * \ - which provides the html that runs the Javascript files.
 * \post - used to receive the code text from the frontend 
 * \get - uset to send the results back to the frontend.
