@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# 8086 Emulator Javascript
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![alt text](ss2.png "Main")
 
-## Available Scripts
+## Demo :  http://emu8086.pythonanywhere.com/
 
-In the project directory, you can run:
+An 8086 Emulator that runs in the browser. It has a highlighted code editor, 3 cards - one displaying the flags, another displaying the 64 bits registers and the last displaying the half 8 bits registers of every A, B, C, D register. It can compile code and display the final result or step through each instruction while seeing the values change in real time.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Short Description
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+An web app assembled from 2 pieces: a frontend written in React.js made for the user to interact with and a backend written in Python.
+The backend deals with the processing - uses the unicorn and keystone engine libraries 
+The frontend deals with the state of the app - for instance, if there's new code added you must first compile before running, or when compiling, the values of all registers reset to 0.
+The frontend also can display the values under 3 formats: decimal, binary and hexadecimal.
 
-### `npm test`
+# Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+\* The javascript files are already compiled in the build folder, so there is no need to run node.js. Also, any changes done to the uncompiled JS files will not change anything on the application. \
+\
+\* You need to have python and pip installed for this to work.
 
-### `npm run build`
+* Clone this repository with git
+* Go to the folder named "server" and open a terminal here
+* Run "pip install -r requirements.txt" - this will install the neccessary libs
+* After the installation is done, run "python -m flask run"
+* Open the link displayed in the terminal and you're done.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Functionalities
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* The user can write code on a highlighted text editor.
+* The user can add comments to the code using ';'.
+* Run guard - You cannot run the program until you compile it first.
+* Can compile and run as many times as the user wants without breaking.
+* Error pop-up in case the code contains errors and application does not stop.
+* User can run the program once and get the final results.
+* User can run the program on every instruction and see the results after each step in real time.
+* User can convert the values of the registers to decimal, binary and hexadecimal.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Implementation
+\* Problem solved: Had to switch to a python backend due to the fact that the Unicorn library for Javascript got discontinued and was not fully developed.
 
-### `npm run eject`
+The python script named server.py runs a Flask server with 3 routes\
+* \ - which provides the html that runs the Javascript files.
+* \post - used to receive the code text from the frontend 
+* \get - uset to send the results back to the frontend.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Uses the Keystone library to convert the ASCII text code received to a binary string of instructions. Then the instrusctions string is fed to a Unicorn Engine instance to run the emulation. With a custom hook function the script saves in a list of dictionaries every state of the registers and flags. At the end of the emulation another list is created to save the final state.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The result is then sent to the frontend where the user can see the final results or go through each step of the program until it reaches the final state.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Screenshots
+Application\
+![alt text](ss1.png "Application")
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Code Editor\
+![alt text](ss3.png "Main")
 
-## Learn More
+Flags\
+![alt text](ss6.png "Main")
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Registers\
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![alt text](ss4.png "Main")
+![alt text](ss5.png "Main")
 
-### Code Splitting
+# Examples
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  https://windprophet.github.io/emu8086/
 
-### Analyzing the Bundle Size
+  8086 Emulator - displays memory, flags and registers.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  https://schweigi.github.io/assembler-simulator/
 
-### Making a Progressive Web App
+  Assembly emulator with an 8 bit CPU and only 256 bytes of memory.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  https://github.com/ihmels/asmsimulator
 
-### Advanced Configuration
+  16 bit CPU with 1024 bytes of memory.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  https://marie.js.org/
